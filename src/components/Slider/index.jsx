@@ -99,41 +99,14 @@ export default class Slider extends Component {
             delay={this.state.delay}
             delaySelect={this.delaySelect}
           />
-          {/* <figure className={styles.slidesContainer}>
-            <div className={styles.imageContainer}>
-              <img
-                className={styles.image}
-                height="300"
-                src={slides[this.state.currentImageIndex].src}
-                alt={slides[this.state.currentImageIndex].title}
-              />
-            </div>
-            <button
-              className={styles.playBtn}
-              onClick={this.handlePlayBtn}
-            >
-              {this.state.isPlaying ? "pause" : "play"}
-            </button>
-            <h2 className={styles.sliderTitle}>
-              {slides[this.state.currentImageIndex].title}
-            </h2>
-            <figcaption className={styles.imageDescription}>
-              {slides[this.state.currentImageIndex].description}
-            </figcaption>
-            <button
-              className={`${styles.prevBtn} ${styles.buttons}`}
-              onClick={() => this.prevSlide()}
-            >
-              <GrLinkPrevious size="25" />
-            </button>
-            <button
-              className={`${styles.nextBtn} ${styles.buttons}`}
-              onClick={() => this.nextSlide()}
-            >
-              <GrLinkNext size="25" />
-            </button>
-          </figure> */}
-          <Slide slides={slides} index={this.state.currentImageIndex} isPlaying={this.state.isPlaying}/>
+          <Slide
+            slides={slides}
+            index={this.state.currentImageIndex}
+            isPlaying={this.state.isPlaying}
+            prevSlide={this.prevSlide}
+            nextSlide={this.nextSlide}
+            handlePlayBtn={this.handlePlayBtn}
+          />
         </article>
       </main>
     );

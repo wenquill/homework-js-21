@@ -12,8 +12,8 @@ export default class Slide extends Component {
           <img
             className={styles.image}
             height="300"
-            src={slides[this.state.index].src}
-            alt={slides[this.state.index].title}
+            src={slides[index].src}
+            alt={slides[index].title}
           />
         </div>
         <button
