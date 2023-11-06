@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import styles from "./Slider.module.css";
+import { GrLinkPrevious, GrLinkNext } from "react-icons/gr";
 
 const slides = [
   {
@@ -82,36 +84,60 @@ export default class Slider extends Component {
 
   render() {
     return (
-      <article>
-        <label>
-          <p>Select the delay:</p>
-          <input
-            type="number"
-            min={1}
-            max={10}
-            value={this.state.delay / 1000}
-            onChange={({ target: { value } }) =>
-              this.setState({ delay: Number(value) * 1000 })
-            }
-          />
-        </label>
-        <figure>
-          <img
-            src={slides[this.state.currentImageIndex].src}
-            alt={slides[this.state.currentImageIndex].title}
-          />
-          <figcaption>
-            {slides[this.state.currentImageIndex].description}
-          </figcaption>
-        </figure>
-        <button onClick={() => this.nextSlide()}>{"<"}</button>
-        <button onClick={() => this.prevSlide()}>{">"}</button>
-        <button
-          onClick={() => this.setState({ isPlaying: !this.state.isPlaying })}
-        >
-          {this.state.isPlaying ? "PAUSE" : "PLAY"}
-        </button>
-      </article>
+      <main>
+        <h1 className={styles.title}>Space Slider</h1>
+        <article className={styles.sliderContainer}>
+          <div className={styles.controlUnitContainer}>
+            <label htmlFor="delay">Select the delay:</label>
+            <input
+              type="number"
+              name="delay"
+              min={1}
+              max={10}
+              value={this.state.delay / 1000}
+              onChange={({ target: { value } }) =>
+                this.setState({ delay: Number(value) * 1000 })
+              }
+            />
+          </div>
+          <figure className={styles.slidesContainer}>
+            <div className={styles.imageContainer}>
+              <img
+                className={styles.image}
+                height="300"
+                src={slides[this.state.currentImageIndex].src}
+                alt={slides[this.state.currentImageIndex].title}
+              />
+            </div>
+            <button
+              className={styles.playBtn}
+              onClick={() =>
+                this.setState({ isPlaying: !this.state.isPlaying })
+              }
+            >
+              {this.state.isPlaying ? "pause" : "play"}
+            </button>
+            <h2 className={styles.sliderTitle}>
+              {slides[this.state.currentImageIndex].title}
+            </h2>
+            <figcaption className={styles.imageDescription}>
+              {slides[this.state.currentImageIndex].description}
+            </figcaption>
+            <button
+              className={`${styles.prevBtn} ${styles.buttons}`}
+              onClick={() => this.prevSlide()}
+            >
+              <GrLinkPrevious size="25" />
+            </button>
+            <button
+              className={`${styles.nextBtn} ${styles.buttons}`}
+              onClick={() => this.nextSlide()}
+            >
+              <GrLinkNext size="25" />
+            </button>
+          </figure>
+        </article>
+      </main>
     );
   }
 }
