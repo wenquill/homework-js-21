@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import styles from "./Slider.module.css";
 import { GrLinkPrevious, GrLinkNext } from "react-icons/gr";
+import SliderControl from "./SliderControl";
+import Slide from "./Slide";
 
 const slides = [
   {
@@ -61,6 +63,12 @@ export default class Slider extends Component {
     });
   };
 
+  delaySelect = ({ target: { value } }) => {
+    this.setState({ delay: Number(value) * 1000 });
+  };
+
+  handlePlayBtn = () => this.setState({ isPlaying: !this.state.isPlaying });
+
   componentDidMount() {
     console.log(this.state.currentImageIndex);
   }
@@ -87,20 +95,11 @@ export default class Slider extends Component {
       <main>
         <h1 className={styles.title}>Space Slider</h1>
         <article className={styles.sliderContainer}>
-          <div className={styles.controlUnitContainer}>
-            <label htmlFor="delay">Select the delay:</label>
-            <input
-              type="number"
-              name="delay"
-              min={1}
-              max={10}
-              value={this.state.delay / 1000}
-              onChange={({ target: { value } }) =>
-                this.setState({ delay: Number(value) * 1000 })
-              }
-            />
-          </div>
-          <figure className={styles.slidesContainer}>
+          <SliderControl
+            delay={this.state.delay}
+            delaySelect={this.delaySelect}
+          />
+          {/* <figure className={styles.slidesContainer}>
             <div className={styles.imageContainer}>
               <img
                 className={styles.image}
@@ -111,9 +110,7 @@ export default class Slider extends Component {
             </div>
             <button
               className={styles.playBtn}
-              onClick={() =>
-                this.setState({ isPlaying: !this.state.isPlaying })
-              }
+              onClick={this.handlePlayBtn}
             >
               {this.state.isPlaying ? "pause" : "play"}
             </button>
@@ -135,7 +132,8 @@ export default class Slider extends Component {
             >
               <GrLinkNext size="25" />
             </button>
-          </figure>
+          </figure> */}
+          <Slide slides={slides} index={this.state.currentImageIndex} isPlaying={this.state.isPlaying}/>
         </article>
       </main>
     );
